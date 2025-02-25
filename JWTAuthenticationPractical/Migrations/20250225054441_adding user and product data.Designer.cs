@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JWTAuthenticationPractical.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20250225044954_adding user and product data")]
+    [Migration("20250225054441_adding user and product data")]
     partial class addinguserandproductdata
     {
         /// <inheritdoc />
