@@ -11,6 +11,7 @@ namespace JWTAuthenticationPractical.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class UserAuthController(ProductDbContext _context) : ControllerBase
     {
         [HttpPost("Login")]
@@ -30,24 +31,19 @@ namespace JWTAuthenticationPractical.Controllers
 
             else
             {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mypassaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-
-                var tokenOptions = new JwtSecurityToken
-                    (
-
-                    issuer: "http://localhost:7038",
-                        audience: "http://locahost:7038",
-                        claims: new List<Claim>(),
-                        expires: DateTime.Now.AddMinutes(5),
-                        signingCredentials: signinCredentials
-
+                
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"));
+                var signinCredential = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                var tokenOptions = new JwtSecurityToken(
+                    issuer: "http://localhost:7287",
+                    audience: "http://localhost:7287",
+                    claims: new List<Claim>(),
+                    expires: DateTime.Now.AddMinutes(5),
+                    signingCredentials: signinCredential
                     );
-
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+                return Ok(new LoginResponse { Token = tokenString, UserName = user.UserName });
 
-                return Ok(new LoginResponse { Token = tokenString, UserName = user.UserName, UserPassword = user.UserPassword });
 
             }
 

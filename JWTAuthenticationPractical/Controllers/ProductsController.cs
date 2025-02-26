@@ -1,5 +1,6 @@
 ﻿using JWTAuthenticationPractical.Data;
 using JWTAuthenticationPractical.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace JWTAuthenticationPractical.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController(ProductDbContext _context) : ControllerBase
     {
         [HttpGet("ALL PRODUCTS")]
